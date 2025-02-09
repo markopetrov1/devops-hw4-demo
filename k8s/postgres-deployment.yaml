@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-db
+spec:
+  ports:
+  - port: 5432
+  selector:
+    app: devops-db
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-db
+spec:
+  selector:
+    matchLabels:
+      app: devops-db
+  template:
+    metadata:
+      labels:
+        app: devops-db
+    spec:
+      containers:
+      - image: postgres:latest
+        name: devops-db
+        env:
+        - name: POSTGRES_DB
+          value: devops
+        - name: POSTGRES_USER
+          value: admin
+        - name: POSTGRES_PASSWORD
+          value: password
+        ports:
+        - containerPort: 5432
