@@ -1,15 +1,15 @@
-name: CI/CD Pipeline
+name: Production CI/CD Pipeline
 
 on:
   push:
     branches:
-      - master
+      - master  
   pull_request:
     branches:
       - master
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-production:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
